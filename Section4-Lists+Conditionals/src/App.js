@@ -5,9 +5,9 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: "Nidhi", age: 20 },
-      { name: "Jiya", age: 15 },
-      { name: "Siya", age: 15 },
+      { id: '1', name: 'Nidhi', age: 20 },
+      { id: '2', name: 'Jiya', age: 15 },
+      { id: '3', name: 'Siya', age: 15 },
     ],
     showPersons: false
   };
@@ -19,14 +19,21 @@ class App extends Component {
     this.setState({persons: persons}) //update the old persons state to the new spliced one 
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: event.target.value, age: 20 },
-        { name: "Jiya Sharma", age: 15 },
-        { name: "Siya Bharwani", age: 15 },
-      ]
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(pInput => {
+      return pInput.id === id;
     });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState( { persons: persons } );
   };
 
   togglePersonsHandler = () => {
@@ -52,7 +59,9 @@ class App extends Component {
             return <Person 
               click={() => this.deletePersonHandler(index)}
               name={person.name}
-              age={person.age}/>
+              age={person.age}
+              key={person.id} 
+              changed={(event) => this.nameChangedHandler(event, person.id)}/>
           })}
         </div>
       )
