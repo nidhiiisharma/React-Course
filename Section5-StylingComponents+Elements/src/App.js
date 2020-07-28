@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 /* import Radium, { StyleRoot } from 'radium'; // 3rd party package for psuedo selectors & media queries */
 /* import styled from 'styled-components'; // 3rd party package for styling  */
-import './App.css';
+import classes from './App.css';
 import Person from './Person/Person';
 
 /* const StyledButton = styled.button`
@@ -78,6 +78,7 @@ class App extends Component {
     } */
 
     let persons = null;
+    let btnClass = '';
 
     if( this.state.showPersons ){
       persons = (
@@ -92,7 +93,10 @@ class App extends Component {
           })}
         </div>
       )
-/*    style.backgroundColor = 'blue';
+
+      btnClass = classes.blue;
+
+  /*  style.backgroundColor = 'blue';
       style.border = '1px solid blue';
 
       style[':hover'] = {
@@ -102,21 +106,21 @@ class App extends Component {
       } */
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2){
-      classes.push('red'); // classes = ['red']
+      assignedClasses.push(classes.red); // classes = ['red']
     }
     if (this.state.persons.length <= 1){
-      classes.push('bold') // classes = ['red','bold']
+      assignedClasses.push(classes.bold) // classes = ['red','bold']
     }
 
     return (
       // use styleroot so media queries can work
       // <StyleRoot >
-        <div className="App">
+        <div className={classes.App}>
         <h1>This is my first react app</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        <button className="button" alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
+        <button className={btnClass} alt={this.state.showPersons} onClick={this.togglePersonsHandler}>
           Toggle Persons
         </button>
         {persons}

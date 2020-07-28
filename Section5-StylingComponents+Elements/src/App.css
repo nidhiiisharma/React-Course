@@ -7,7 +7,7 @@
 .bold{
   font-weight: bold;
 }
-.button{
+.App button{
   background-color: green;
   color: white; 
   font: inherit;
@@ -17,8 +17,15 @@
   cursor: pointer;
   outline: none;
 }
-button:hover {
+.App button:hover {
   background-color: lightgreen;
   border: 1px solid lightgreen; 
   color: black;
+}
+.App button.blue{
+  background-color: blue;
+}
+.App button.blue:hover{
+  background-color: skyblue;
+  border: 1px solid skyblue;
 }

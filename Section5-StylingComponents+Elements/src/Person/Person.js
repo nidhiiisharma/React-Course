@@ -1,9 +1,9 @@
 import React from 'react';
 /* import Radium from 'radium'; // 3rd party package for psuedo selectors & media queries */
 import styled from 'styled-components'; // 3rd party package for styling
-// import './Person.css';
+import classes from './Person.css';
 
-const StyledDiv = styled.div`
+/* const StyledDiv = styled.div`
     width: 60%;
     margin: 16px auto;
     border: 1px solid #eee;
@@ -14,7 +14,7 @@ const StyledDiv = styled.div`
     @media (min-width: 500px) {
         width: 450px;
     }
-`;
+`; */
 
 const person = (props) => {
 /*     const style = {
@@ -25,11 +25,13 @@ const person = (props) => {
     }; */
     return (
         // <div className="Person" style={style}>
-        <StyledDiv >
+        // <StyledDiv >
+        <div className={classes.Person}>
             <p onClick={props.click}>I am {props.name} and I am {props.age} years old!</p>
             <p>{props.children}</p>
             <input type="text" onChange={props.changed} value={props.name}></input>
-        </StyledDiv>
+        </div>
+        // <StyledDiv >
     )
 }
 
