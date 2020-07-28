@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Radium, { StyleRoot } from 'radium'; // 3rd party package for psuedo selectors & media queries
 import Person from './Person/Person';
 
 class App extends Component {
@@ -49,7 +50,13 @@ class App extends Component {
       border: '1px solid green',
       borderRadius: '4px',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      outline: 'none',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        border: '1px solid lightgreen',
+        color: 'black'
+      }
     }
 
     let persons = null;
@@ -69,6 +76,12 @@ class App extends Component {
       )
       style.backgroundColor = 'blue';
       style.border = '1px solid blue';
+
+      style[':hover'] = {
+        backgroundColor: 'skyblue',
+        border: '1px solid skyblue',
+        color: 'black'
+      }
     }
 
     const classes = [];
@@ -80,7 +93,9 @@ class App extends Component {
     }
 
     return (
-      <div className="App">
+      // use styleroot so media queries can work
+      <StyleRoot >
+        <div className="App">
         <h1>This is my first react app</h1>
         <p className={classes.join(' ')}>This is really working!</p>
         <button 
@@ -88,9 +103,10 @@ class App extends Component {
           onClick={this.togglePersonsHandler}>Toggle Persons</button>
         {persons}
       </div>
+      </StyleRoot>
     );
     //return React.createElement('div', {className:'App'}, React.createElement('h1', null, 'Does this work now?'))
     }
   }
 
-  export default App;
+  export default Radium(App);
