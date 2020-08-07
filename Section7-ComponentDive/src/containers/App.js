@@ -4,14 +4,27 @@ import PersonList from '../components/PersonList/PersonList';
 import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: '1', name: 'Nidhi', age: 20 },
-      { id: '2', name: 'Jiya', age: 15 },
-      { id: '3', name: 'Siya', age: 15 },
-    ],
-    showPersons: false
-  };
+  constructor(props){
+    super(props);
+    console.log('[App.js], constructor');
+    this.state = {
+      persons: [
+        { id: '1', name: 'Nidhi', age: 20 },
+        { id: '2', name: 'Jiya', age: 15 },
+        { id: '3', name: 'Siya', age: 15 },
+      ],
+      showPersons: false
+    };
+  }
+
+  static getDerivedStateFromProps(props, state){
+    console.log('[App.js], getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount(){
+    console.log('[App.js], componentDidMount');
+  }
 
   deletePersonHandler = (personIndex) => {
     //const persons = this.state.persons.slice();
@@ -43,14 +56,15 @@ class App extends Component {
   }
 
   render() {
-
+    console.log('[App.js], render')
     let persons = null;
 
     if( this.state.showPersons ){
-      persons = <PersonList
-            persons={this.state.persons}
-            clicked={this.deletePersonHandler}
-            changed={this.nameChangedHandler} />;
+      persons = 
+      <PersonList
+        persons={this.state.persons}
+        clicked={this.deletePersonHandler}
+        changed={this.nameChangedHandler} />;
     }
 
     return (
